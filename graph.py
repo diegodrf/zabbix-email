@@ -1,7 +1,7 @@
 import datetime
 import requests
 
-def test():
+def graph():
     itemname = 'CPU Total'
     period = 3600 # 1h
     width = 800
@@ -28,4 +28,4 @@ def test():
         return img.content
 
 if __name__ == '__main__':
-    test()
+    graph()

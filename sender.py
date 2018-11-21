@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from sys import argv
-import main
+import graph
 
 def encode(text):
     return text.encode('utf-8')
@@ -19,14 +19,8 @@ def send_email(user, password, from_addr, smtp_server, smtp_port, to_addrs, subj
 
     text = MIMEText('Teste')
     msg.attach(text)
-    image = MIMEImage(main.test())
+    image = MIMEImage(graph.graph())
     msg.attach(image)
-
-    # email_body = 'From: Monitoramento <{}>\n'.format(user) + \
-    #              'To: Cliente <{}>\n'.format(','.join(to_addrs)) + \
-    #              'MIME-Version: 1.0\nContent-type: text/html\nSubject: {}\n'.format(subject) + \
-    #              '{}'.format(message)
-
 
     smtpObj = smtplib.SMTP(host=smtp_server, port=smtp_port)
     smtpObj.ehlo()
