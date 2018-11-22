@@ -20,11 +20,13 @@ def index():
     subject = request.form['7']
     message = request.form['8']
 
-
-    send_email(user, password, from_addr, smtp_server, smtp_port, to_addrs, subject, message)
-    status = {'status': 'OK'}
-    return jsonify(status)
-
+    try:
+        send_email(user, password, from_addr, smtp_server, smtp_port, to_addrs, subject, message)
+        status = {'status': 'OK'}
+        return jsonify(status)
+    except Exception as error:
+        status = {'status': 'Fail', 'message': str(error)}
+        return jsonify(status)
 
 if __name__ == '__main__':
     app.run(debug=True)
