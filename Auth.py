@@ -5,6 +5,6 @@ import os
 
 
 class Auth:
-    zabbixServer = os.getenv('ZABBIXSERVER', 'http://127.0.0.1/zabbix')
+    zabbixServer = os.getenv('ZABBIXSERVER', 'http://docker.westus2.cloudapp.azure.com/zabbix')
     zabbixUser = os.getenv('ZABBIXUSER', 'Admin')
     zabbixPassword = os.getenv('ZABBIXPASSWORD', 'zabbix')

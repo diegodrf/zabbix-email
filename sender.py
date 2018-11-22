@@ -15,6 +15,10 @@ def encode(text):
 # Função que monta o e-mail e envia.
 def send_email(user, password, from_addr, smtp_server, smtp_port, to_addrs, subject, message):
 
+    # Parse do ID e nome do item
+    itemName = get_itemName(message)
+    itemID = get_itemID(message)
+
     msg = MIMEMultipart('related')
     msg['Subject'] = subject
     msg['From'] = user
@@ -22,10 +26,13 @@ def send_email(user, password, from_addr, smtp_server, smtp_port, to_addrs, subj
 
     text = MIMEText(message, 'html')
     msg.attach(text)
-    image = MIMEImage(graph(get_itemName(message), get_itemID(message)), 'png')
-    image.add_header('Content-ID', '<image1>')
-    image.add_header('Content-Disposition', 'inline', filename='graph.png')
-    msg.attach(image)
+
+    # Só anexa a imagem se a mesma for encontrada
+    if (itemName or itemID) is not None:
+        image = MIMEImage(graph(itemName, itemID), 'png')
+        image.add_header('Content-ID', '<image1>')
+        image.add_header('Content-Disposition', 'inline', filename='graph.png')
+        msg.attach(image)
 
     smtpObj = smtplib.SMTP(host=smtp_server, port=smtp_port)
     smtpObj.ehlo()
