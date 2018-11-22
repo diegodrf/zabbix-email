@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 from sender import send_email
-import json
 
 app = Flask(__name__)
 
